@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  # Minimal Ubuntu server container (replace with a lightweight image if desired)
+  k8s-master:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    volumes:
+      - k8s-data:/var/lib/kubernetes
+      - k8s-config:/etc/kubernetes
+
+  # Worker node (another Ubuntu container)
+  k8s-worker:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    volumes:
+      - k8s-data:/var/lib/kubernetes
+
+volumes:
+  # Persistent storage for Kubernetes data
+  k8s-data:
+  # Configuration volume (optional, can be mounted within the container)
+  k8s-config:
+

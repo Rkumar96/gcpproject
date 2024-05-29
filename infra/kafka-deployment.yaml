@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  namespace: X-OSM
+spec:
+  replicas: 1  # Adjust if you need more than one broker
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: debezium/kafka:11.2.2-cp-kafka-8.3.1  # Replace with a specific image version if needed
+        ports:
+        - containerPort: 9092  # Kafka port
+        - containerPort: 2181  # Zookeeper port (if using internal Zookeeper)
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+          limits:
+            memory: "4Gi"
+            cpu: "4"
+        # Optional: Configure environment variables and volume claims
+
+
